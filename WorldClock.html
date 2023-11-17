@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Clock</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #282c34;
+            color: #c261fb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #clock-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #clock-container h2 {
+            margin-top: 0;
+        }
+
+        #city-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .city-box {
+            margin: 10px;
+            padding: 10px;
+            background-color: #c261fb;
+            color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div id="clock-container">
+    <h2>World Clock</h2>
+    <div id="time"></div>
+    <div id="city-list">
+        <div class="city-box" id="tehran">Tehran</div>
+        <div class="city-box" id="london">London</div>
+        <div class="city-box" id="new-york">New York</div>
+        <div class="city-box" id="tokyo">Tokyo</div>
+        <div class="city-box" id="sydney">Sydney</div>
+        <div class="city-box" id="paris">Paris</div>
+        <div class="city-box" id="dubai">Dubai</div>
+        <div class="city-box" id="los-angeles">Los Angeles</div>
+        <!-- شهرهای دیگر را اضافه کنید -->
+    </div>
+</div>
+
+<script>
+    function updateClock() {
+        var now = new Date();
+        var timeElement = document.getElementById("time");
+        timeElement.textContent = now.toLocaleString('en-US', { timeZone: 'UTC' });
+
+        updateTimeForCity("tehran", now, 'Asia/Tehran');
+        updateTimeForCity("london", now, 'Europe/London');
+        updateTimeForCity("new-york", now, 'America/New_York');
+        updateTimeForCity("tokyo", now, 'Asia/Tokyo');
+        updateTimeForCity("sydney", now, 'Australia/Sydney');
+        updateTimeForCity("paris", now, 'Europe/Paris');
+        updateTimeForCity("dubai", now, 'Asia/Dubai');
+        updateTimeForCity("los-angeles", now, 'America/Los_Angeles');
+        // شهرهای دیگر را اضافه کنید
+    }
+
+    function updateTimeForCity(cityId, currentTime, timeZone) {
+        var cityElement = document.getElementById(cityId);
+        var cityTime = currentTime.toLocaleString('en-US', { timeZone: timeZone });
+        cityElement.textContent = cityId.charAt(0).toUpperCase() + cityId.slice(1) + ": " + cityTime;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+</script>
+
+</body>
+</html>
